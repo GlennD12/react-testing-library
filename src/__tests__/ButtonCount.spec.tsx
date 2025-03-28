@@ -10,7 +10,7 @@ describe("Button Count", () => {
         const user = userEvent.setup();
         const elemButton = screen.getByRole("button");
         const countContainer = screen.getByRole("strong");
-        
+                
         await user.click(elemButton);
         expect(countContainer).toHaveTextContent("1");
 
