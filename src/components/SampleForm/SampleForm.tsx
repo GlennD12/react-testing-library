@@ -2,7 +2,7 @@ export const SampleForm = () => {
     return (
         <form>
             <div>
-                <input type="text" name="fullName" id="fullName" />
+                <input type="text" name="fullName" id="fullName" /> 
                 <input type="number" name="age" data-testid="age" />
             </div>
             <div>
