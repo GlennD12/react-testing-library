@@ -5,6 +5,7 @@ import { FakeProductsTypes } from "../../types/FakeProducts.types";
 export const FakeProducts = () => {
     // State to store the fetched data
     const [data, setData] = useState<FakeProductsTypes[]>([]);
+    const [loading, setLoading] = useState(true);
   
     // Function to fetch data using Axios
     const fetchData = async () => {
@@ -14,6 +15,7 @@ export const FakeProducts = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+      setLoading(false);
     };
   
     // Call fetchData on component mount
@@ -23,14 +25,17 @@ export const FakeProducts = () => {
   
     return (
         <>
-        <div>
-            <h2>Posts:</h2>
-            <ul>
-            {data.map((post) => (
-                <li key={post.id}><input type="text" value={post.title} data-testid={post.title} /></li>
-            ))}
-            </ul>
-        </div>
+        {loading && <div>Loading</div>}
+        {!loading && (
+            <div>
+                <h2>Posts:</h2>
+                <ul>
+                {data.map((post) => (
+                    <li key={post.id}><input type="text" value={post.title} data-testid={post.title} /></li>
+                ))}
+                </ul>
+            </div>
+        )}
         </>
     );
   };

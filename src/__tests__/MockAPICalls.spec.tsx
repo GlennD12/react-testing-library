@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { FakeProducts } from '../components/FakeProducts/FakeProducts'
 
 const server = setupServer(
@@ -46,16 +46,16 @@ afterAll(() => server.close())
 it('displays the list of recent posts', async () => {
   render(<FakeProducts />)
 
-  // 🕗 Wait for the posts request to be finished.
-//   await waitFor(() => {
-//     expect(
-//       screen.getByLabelText('Fetching latest posts...'),
-//     ).not.toBeInTheDocument()
-//   })
+//   🕗 Wait for the posts request to be finished.
+  await waitFor(() => {
+    expect(
+      screen.getByText("Posts:")).toBeInTheDocument();
+  })
 
   // ✅ Assert that the correct posts have loaded.
-//   expect(screen.getByTestId("test")).toBeInTheDocument()
-  expect(screen.getAllByRole("textbox")).toBeInTheDocument()
+  expect(screen.getByTestId("test")).toBeInTheDocument()
+//   const textBoxElement = screen.getAllByRole("textbox");
+//   expect(textBoxElement).toBeInTheDocument()
 
 //   expect(
 //     screen.getByTestId("test1"),
