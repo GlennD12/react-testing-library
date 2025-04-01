@@ -21,6 +21,21 @@ const handlers = [
       ]),
     )
   }),
+  // rest.post('http://localhost:3000/products', (req , res, ctx) => {
+  //   const data = req.json();
+  //   return res(
+  //     ctx.json([
+  //       {
+  //           id: 0,
+  //           title: "test title",
+  //           price: 0.1,
+  //           description: "test description",
+  //           category: "test category",
+  //           image: "test image"
+  //       },
+  //     ]),
+  //   )
+  // }),
 ];
 
 const server = setupServer(...handlers)
