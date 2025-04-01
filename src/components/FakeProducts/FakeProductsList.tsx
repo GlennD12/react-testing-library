@@ -1,3 +1,6 @@
+import EditIcon from '../../images/pen.png';
+import DeleteIcon from '../../images/remove.png';
+
 export const FakeProductsList = (props: any) => {
   return (
     <>
@@ -15,13 +18,13 @@ export const FakeProductsList = (props: any) => {
                 <td className="px-6 py-4">{post.price}</td>
                 <td className="px-6 py-4">{post.category}</td>
                 <td className="px-6 py-4"><img src={post.image} /></td>
-                <td className="px-6 py-4 text-right">
-                <a
-                    href="#"
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                    Edit
-                </a>
+                <td className="px-6 py-4 flex items-center">
+                    <a href="#" className="py-14 px-2">
+                        <img className="object-contain" src={EditIcon} alt="" />
+                    </a>
+                    <a href="#" className="py-14 px-2" onClick={props.onDeleteFakeProducts}>
+                        <img className="object-contain" src={DeleteIcon} alt="" />
+                    </a>
                 </td>
             </tr>
             ))}

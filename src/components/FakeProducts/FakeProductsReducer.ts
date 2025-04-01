@@ -26,6 +26,11 @@ export const fakeProductsFormReducer = (state: any, action: any) => {
         ...state,
         data: action.payload.value,
     };
+    case "DELETE_DATA":
+      return {
+          ...state,
+          data: action.payload.value,
+    };
     case "CHANGE_INPUT":
       return {
         ...state,

@@ -42,11 +42,26 @@ export const FakeProducts = () => {
       };
 
       const response = await axios.post('http://localhost:3000/products', product);
-      console.log(response);
-      // dispatch({ 
-      //   type: "POST_DATA",
-      //   payload: { value: response.data },
-      // });
+      dispatch({ 
+        type: "POST_DATA",
+        payload: { value: response.data },
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR_GETTING_DATA",
+        payload: { value: error },
+      });
+    }
+  }
+
+  const deleteFakeProducts = async () => {
+    try {
+      await axios.delete('http://localhost:3000/products/1');
+      const response = await axios.get("http://localhost:3000/products");
+      dispatch({
+        type: "GET_DATA",
+        payload: { value: response.data },
+      });
     } catch (error) {
       dispatch({
         type: "ERROR_GETTING_DATA",
@@ -141,7 +156,7 @@ export const FakeProducts = () => {
                 </th>
               </tr>
             </thead>
-            <FakeProductsList productList={state.data} />
+            <FakeProductsList productList={state.data} onDeleteFakeProducts={deleteFakeProducts}/>
           </table>
           <AddFakeProduct
             isVisible={state.isAddProductModalVisible}
