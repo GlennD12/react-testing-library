@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from "@testing-library/react"
 import { userEvent } from '@testing-library/user-event';
-import TodoForm from '../components/TodoForm';
-import App from '../App';
+import TodoForm from '../components/Todo/TodoForm';
+import { TodoMain } from '../components/Todo/TodoMain';
 
 describe('TodoForm', () => {
     const handleSubmit = jest.fn();
@@ -18,7 +18,7 @@ describe('TodoForm', () => {
     });
 
     it('Todo App is in the text', () => {
-        render(<App />);
+        render(<TodoMain />);
         const linkElement = screen.getByText(/Todo App/i);
         expect(linkElement).toBeInTheDocument();
     });

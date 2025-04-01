@@ -10,7 +10,7 @@ export const FakeProducts = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://fakestoreapi.com/products");
+      const response = await axios.get("http://localhost:3000/products");
       dispatch({
         type: "GET_DATA",
         payload: { value: response.data },
@@ -31,14 +31,22 @@ export const FakeProducts = () => {
     dispatch({ type: "CLOSE_ADD_PRODUCTS_MODAL" });
   };
 
-  const addFakeProducts = async (e: any) => {
-    e.preventdefault();
+  const addFakeProducts = async () => {
     try {
-      const response = await axios.post("https://fakestoreapi.com/products");
-      dispatch({ 
-        type: "POST_DATA",
-        payload: { value: response.data },
-      });
+      const product = { 
+        title: state.title, 
+        price: state.price,
+        description: state.description,
+        category: state.category,
+        image: state.image
+      };
+
+      const response = await axios.post('http://localhost:3000/products', product);
+      console.log(response);
+      // dispatch({ 
+      //   type: "POST_DATA",
+      //   payload: { value: response.data },
+      // });
     } catch (error) {
       dispatch({
         type: "ERROR_GETTING_DATA",

@@ -1,5 +1,5 @@
 import { PartyPopper } from "lucide-react";
-import { Todo } from "../types/todo";
+import { Todo } from "../../types/todo";
 import TodoItem from "./TodoItem";
 
 interface TodoListProps {

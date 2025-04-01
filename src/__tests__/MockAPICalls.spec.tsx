@@ -6,7 +6,7 @@ import { userEvent } from '@testing-library/user-event';
 import { FakeProducts } from '../components/FakeProducts/FakeProducts'
 
 const handlers = [
-  rest.get('https://fakestoreapi.com/products', (req , res, ctx) => {
+  rest.get('http://localhost:3000/products', (req , res, ctx) => {
     console.log(req);
     return res(
       ctx.json([

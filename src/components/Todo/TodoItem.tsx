@@ -1,5 +1,5 @@
 import { Trash2Icon } from "lucide-react";
-import { Todo } from "../types/todo";
+import { Todo } from "../../types/todo";
 
 interface TodoItemProps {
     todo: Todo;
