@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useReducer, useEffect } from "react";
 import { AddFakeProduct } from "./AddFakeProduct";
+import { EditFakeProducts } from "./EditFakeProducts";
 import { INITIAL_STATE } from "./FakeProductsReducer";
 import { fakeProductsFormReducer } from "./FakeProductsReducer";
 import { FakeProductsList } from "./FakeProductsList";
+
 
 export const FakeProducts = () => {
   const [state, dispatch] = useReducer(fakeProductsFormReducer, INITIAL_STATE);
@@ -31,6 +33,52 @@ export const FakeProducts = () => {
     dispatch({ type: "CLOSE_ADD_PRODUCTS_MODAL" });
   };
 
+  const openEditFakeProductsModal = (targetEditData: any) => {
+    dispatch({ 
+      type: "OPEN_EDIT_PRODUCTS_MODAL",
+      payload: {
+        value: targetEditData
+      }
+    });
+  };
+
+  const closeEditFakeProductsModal = () => {
+    dispatch({ type: "CLOSE_EDIT_PRODUCTS_MODAL" });
+  };
+
+  const updateFakeProducts = async (event: any) => {
+    event.preventDefault();
+    const id = event.target.id.value;
+    // const product = { 
+    //   title: event.target.title.value, 
+    //   price: event.target.price.value,
+    //   description: event.target.description.value,
+    //   category: event.target.category,
+    //   image: event.target.image
+    // };
+
+    // console.log(product);
+    // console.log(id);
+    try {
+      const product = { 
+        title: event.target.title.value, 
+        price: event.target.price.value,
+        description: event.target.description.value,
+        category: event.target.category,
+        image: event.target.image
+      };
+
+      const response = await axios.put('https://localhost:3000/products/' + id, product);
+      console.log("response.data", response.data);
+
+    } catch (error) {
+      dispatch({
+        type: "ERROR_GETTING_DATA",
+        payload: { value: error },
+      });
+    }
+  }
+
   const addFakeProducts = async () => {
     try {
       const product = { 
@@ -54,19 +102,21 @@ export const FakeProducts = () => {
     }
   }
 
-  const deleteFakeProducts = async () => {
-    try {
-      await axios.delete('http://localhost:3000/products/1');
-      const response = await axios.get("http://localhost:3000/products");
-      dispatch({
-        type: "GET_DATA",
-        payload: { value: response.data },
-      });
-    } catch (error) {
-      dispatch({
-        type: "ERROR_GETTING_DATA",
-        payload: { value: error },
-      });
+  const deleteFakeProducts = async (id: string) => {
+    if(confirm("Are you sure you want to delete id: " + id + " ?")){
+      try {
+        await axios.delete('http://localhost:3000/products/' + id);
+        const response = await axios.get("http://localhost:3000/products");
+        dispatch({
+          type: "GET_DATA",
+          payload: { value: response.data },
+        });
+      } catch (error) {
+        dispatch({
+          type: "ERROR_GETTING_DATA",
+          payload: { value: error },
+        });
+      }
     }
   }
 
@@ -117,9 +167,7 @@ export const FakeProducts = () => {
             <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
               Fake products
               <p className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-                Browse a list of Flowbite products designed to help you work and
-                play, stay organized, get answers, keep in touch, grow your
-                business, and more.
+                Fake store rest API for your e-commerce or shopping website prototype
               </p>
               <button
                 onClick={() => {
@@ -156,7 +204,7 @@ export const FakeProducts = () => {
                 </th>
               </tr>
             </thead>
-            <FakeProductsList productList={state.data} onDeleteFakeProducts={deleteFakeProducts}/>
+            <FakeProductsList productList={state.data} onDeleteFakeProducts={(deleteFakeProducts)} onEditFakeProducts={(openEditFakeProductsModal)}/>
           </table>
           <AddFakeProduct
             isVisible={state.isAddProductModalVisible}
@@ -164,6 +212,13 @@ export const FakeProducts = () => {
             onSubmitFakeProducts={addFakeProducts}
             onHandleChange={handleChange}
             formData={state}
+          />
+          <EditFakeProducts
+            isVisible={state.isEditProductModalVisible}
+            onCloseEditModal={closeEditFakeProductsModal}
+            onSubmitFakeProducts={updateFakeProducts}
+            onHandleChange={handleChange}
+            formData={state.editData}
           />
         </div>
       )}

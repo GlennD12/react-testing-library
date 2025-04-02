@@ -1,5 +1,6 @@
-import EditIcon from '../../images/pen.png';
-import DeleteIcon from '../../images/remove.png';
+import 'primeicons/primeicons.css';
+        
+        
 
 export const FakeProductsList = (props: any) => {
   return (
@@ -19,11 +20,13 @@ export const FakeProductsList = (props: any) => {
                 <td className="px-6 py-4">{post.category}</td>
                 <td className="px-6 py-4"><img src={post.image} /></td>
                 <td className="px-6 py-4 flex items-center">
-                    <a href="#" className="py-14 px-2">
-                        <img className="object-contain" src={EditIcon} alt="" />
+                    <a href="#" className="py-14 px-2" onClick={() => {props.onEditFakeProducts(post)}}>
+                        <span className="pi pi-pen-to-square" style={{ fontSize: '1.5rem' }}></span>
                     </a>
-                    <a href="#" className="py-14 px-2" onClick={props.onDeleteFakeProducts}>
-                        <img className="object-contain" src={DeleteIcon} alt="" />
+                    
+                    <a href="#" className="py-14 px-2" onClick={() => {props.onDeleteFakeProducts(post.id)}}>
+                        <span className="pi pi-times-circle" style={{ fontSize: '1.5rem' }}></span>
+                        
                     </a>
                 </td>
             </tr>

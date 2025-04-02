@@ -8,8 +8,10 @@ export const INITIAL_STATE = {
     category: "",
     image: "",
     data: <FakeProductsTypes[]>[],
+    editData: <FakeProductsTypes[]>[],
     loading: true,
     isAddProductModalVisible: false,
+    isEditProductModalVisible: false,
     error: "",
 };
 
@@ -51,6 +53,17 @@ export const fakeProductsFormReducer = (state: any, action: any) => {
       return {
         ...state,
         isAddProductModalVisible: false,
+      };
+    case "OPEN_EDIT_PRODUCTS_MODAL":
+      return {
+        ...state,
+        editData: action.payload.value,
+        isEditProductModalVisible: true,
+      };
+    case "CLOSE_EDIT_PRODUCTS_MODAL":
+      return {
+        ...state,
+        isEditProductModalVisible: false,
       };
     default:
       return state;
