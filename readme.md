@@ -1,4 +1,4 @@
-# ![TOAST UI Editor](https://uicdn.toast.com/toastui/img/tui-editor-bi.png)
+# ![TOAST UI Editor]([https://uicdn.toast.com/toastui/img/tui-editor-bi.png](https://w7.pngwing.com/pngs/403/269/png-transparent-react-react-native-logos-brands-in-colors-icon.png))
 
 > GFM  Markdown and WYSIWYG Editor - Productive and Extensible
 
