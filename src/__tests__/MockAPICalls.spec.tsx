@@ -21,21 +21,21 @@ const handlers = [
       ]),
     )
   }),
-  // rest.post('http://localhost:3000/products', (req , res, ctx) => {
-  //   const data = req.json();
-  //   return res(
-  //     ctx.json([
-  //       {
-  //           id: 0,
-  //           title: "test title",
-  //           price: 0.1,
-  //           description: "test description",
-  //           category: "test category",
-  //           image: "test image"
-  //       },
-  //     ]),
-  //   )
-  // }),
+  rest.post('http://localhost:3000/products', async (req , res, ctx) => {
+    console.log(req);
+    return res(
+      ctx.json([
+        {
+            id: 0,
+            title: "test post",
+            price: 0.1,
+            description: "test post description",
+            category: "test post category",
+            image: "test post image"
+        },
+      ]),
+    )
+  }),
 ];
 
 const server = setupServer(...handlers)
@@ -48,7 +48,7 @@ afterAll(() => server.close());
 
 describe("Mock Service Worker", () => {
   const user = userEvent.setup();
-  test('Fake Products Renders Correctly', async () => {
+  test('GET Fake Products', async () => {
     await waitFor(() => {
       expect(
         screen.getByText("Fake products")).toBeInTheDocument();
@@ -56,13 +56,30 @@ describe("Mock Service Worker", () => {
     expect(screen.getByText('test title')).toBeInTheDocument();
   });
 
-  test('Click Add New Product', async () => {
+  test('POST New Fake Products', async () => {
     await waitFor(() => {
       expect(
         screen.getByText("Fake products")).toBeInTheDocument();
     });
-    const addNewProductBtn = screen.getByText('Add New Product');
+    const addNewProductBtn = screen.getByRole("button", {name: "Add New Product"});
     await user.click(addNewProductBtn);
-    expect(screen.getByText('Create New Product')).toBeInTheDocument();
+    const submitBtn = screen.getByRole("button", {name: "Submit"});
+    await user.click(submitBtn);
+
+    expect(screen.getByText('test post')).toBeInTheDocument();
   })
+
+  // test('DELETE New Fake Products', async () => {
+  //   await waitFor(() => {
+  //     expect(
+  //       screen.getByText("Fake products")).toBeInTheDocument();
+  //   });
+  //   const addNewProductBtn = screen.getByRole("button", {name: "Add New Product"});
+  //   await user.click(addNewProductBtn);
+
+  //   const submitBtn = screen.getByRole("button", {name: "Submit"});
+  //   await user.click(submitBtn);
+
+  //   expect(screen.getByText('test post')).toBeInTheDocument();
+  // })
 });
