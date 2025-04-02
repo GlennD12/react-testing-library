@@ -6,7 +6,7 @@ This repository provides a step-by-step guide to setting up Jest and React Testi
 
 - [Prerequisites](#-prerequisites)
 - [Setup Guide](#-setup-guide)
-- [Features](#-features)
+- [Getting Started](#-getting-started)
 - [Examples](#-examples)
 - [Browser Support](#-browser-support)
 - [Pull Request Steps](#-pull-request-steps)
@@ -15,14 +15,14 @@ This repository provides a step-by-step guide to setting up Jest and React Testi
 - [Used By](#-used-by)
 - [License](#-license)
 
-# Prerequisites
+## Prerequisites
 
 Make sure you have the following installed:
 
 - Node.js
 - npm (Node Package Manager)
 
-# Setup Guide
+## Setup Guide
 
 Follow these steps to set up Jest and React Testing Library in your Vite project.
 
@@ -45,14 +45,15 @@ Add the following "test" script to your package.json file:
 }
 ```
 
-### 3. Install React Testing Library
+### 3. Install React Testing Library, Jest-Dom and MSW
 
-Install React Testing Library and its dependencies:
+Install React Testing Library Jest-Dom and MSW; and its dependencies:
 
 ```
 npm install --save-dev @testing-library/react
 npm install --save-dev @testing-library/jest-dom
 npm install --save-dev @testing-library/user-event
+npm install msw@1.3.5
 ```
 
 ### 4. Install Babel and Other Dependencies
@@ -159,8 +160,44 @@ To run the tests, use the following command:
 npm run test:cov
 ```
 
-### Conclusion
+## Getting Started
+Explaining the functions every libraries and dependencies.
+
+### 1. testing-library/react 
+- API
+
+### 2. testing-library/jest-dom  
+- Custom Jest matchers 
+
+### 3. testing-library/user-event 
+- Simulate Events 
+
+### 4. msw@1.3.5
+- Mock HTTP Request/API Calls
+
+## API
+
+### 1. Render 
+```
+render(<SampleForm />);
+```
+
+### 2. Rerender 
+```
+render(<SampleForm />);
+```
+
+### 3. Queries
+- Ex: getBy..., queryBy..., findBy... 
+```
+screen.[query]([text match]) 
+```
+
+### 4. User Actions
+- Ex: fireEvent
+```
+fireEvent[eventName](node: HTMLElement, eventProperties: Object) 
+```
+
 
 You have now set up Jest and React Testing Library in your Vite project with TypeScript. Happy testing!
-
-## 📦 Packages
