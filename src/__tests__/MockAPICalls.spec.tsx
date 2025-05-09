@@ -40,8 +40,10 @@ const handlers = [
 
 const server = setupServer(...handlers)
 
-
-beforeAll(() => server.listen());
+// for unhandle request, {warn" (Default), "error"	Print an error and halt request execution and "error"	Print an error and halt request execution.}
+beforeAll(() => server.listen({
+    onUnhandledRequest: 'bypass'
+  }));
 beforeEach(() => render(<FakeProducts />));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
